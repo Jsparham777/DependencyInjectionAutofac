@@ -3,18 +3,24 @@ using System;
 
 namespace DemoLibrary
 {
-    public class BusinessLogic
+    public class BusinessLogic : IBusinessLogic
     {
+        private readonly ILogger _logger;
+        private readonly IDataAccess _dataAccess;
+
+        public BusinessLogic(ILogger logger, IDataAccess dataAccess)
+        {
+            _logger = logger;
+            _dataAccess = dataAccess;
+        }
+
         public void ProcessData()
         {
-            Logger logger = new Logger();
-            DataAccess dataAccess = new DataAccess();
-
-            logger.Log("Starting the processing of data.");
+            _logger.Log("Starting the processing of data.");
             Console.WriteLine("Processing the data");
-            dataAccess.LoadData();
-            dataAccess.SaveData("ProcessedInfo");
-            logger.Log("Finished processing of the data.");
+            _dataAccess.LoadData();
+            _dataAccess.SaveData("ProcessedInfo");
+            _logger.Log("Finished processing of the data.");
         }
     }
 }
