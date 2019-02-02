@@ -18,7 +18,10 @@ namespace ConsoleUI
 
             //Register the types associated to the interfaces
             builder.RegisterType<Application>().As<IApplication>();
-            builder.RegisterType<BusinessLogic>().As<IBusinessLogic>();
+            
+            //Easily change out objects by just changing the type, as below
+            //builder.RegisterType<BusinessLogic>().As<IBusinessLogic>();
+            builder.RegisterType<BetterBusinessLogic>().As<IBusinessLogic>();
 
             //Go to the Utilities folder (namespace) register all the classes 
             //and link them to their applicable interfaces
