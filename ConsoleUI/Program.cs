@@ -1,9 +1,5 @@
-﻿using DemoLibrary;
+﻿using Autofac;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ConsoleUI
 {
@@ -11,9 +7,15 @@ namespace ConsoleUI
     {
         public static void Main(string[] args)
         {
-            BusinessLogic businessLogic = new BusinessLogic();
+            //Create the IoC container
+            var container = ContainerConfig.Configure();
 
-            businessLogic.ProcessData();
+            using (var scope = container.BeginLifetimeScope())
+            {
+                //Create a new instance of Application and run it
+                var app = scope.Resolve<IApplication>(); ;
+                app.Run();
+            }
 
             Console.ReadLine();
         }

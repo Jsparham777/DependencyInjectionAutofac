@@ -7,12 +7,17 @@ namespace ConsoleUI
 {
     public static class ContainerConfig
     {
+        /// <summary>
+        /// Container factory (Autofac = Automatic Factory!)
+        /// </summary>
+        /// <returns></returns>
         public static IContainer Configure()
         {
             //Create the builder
             var builder = new ContainerBuilder();
 
             //Register the types associated to the interfaces
+            builder.RegisterType<Application>().As<IApplication>();
             builder.RegisterType<BusinessLogic>().As<IBusinessLogic>();
 
             //Go to the Utilities folder (namespace) register all the classes 
